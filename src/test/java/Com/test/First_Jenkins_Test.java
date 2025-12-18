@@ -5,14 +5,14 @@ import org.junit.Test;
 
 public class First_Jenkins_Test {
 
-    // method under test
-    public int add(int a, int b) {
-        return a + b;
+    @Test
+    public void testAddition() {
+        int result = add(2, 3);
+        assertEquals(5, result);
     }
 
-    @Test
-    public void testAdd() {
-        First_Jenkins_Test calc = new First_Jenkins_Test();
-        assertEquals(12, calc.add(6, 6));
+    // Make it a normal method, not a static inner class
+    public int add(int a, int b) {
+        return a + b;
     }
 }
