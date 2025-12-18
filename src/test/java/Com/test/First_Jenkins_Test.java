@@ -13,6 +13,6 @@ public class First_Jenkins_Test {
     @Test
     public void testAdd() {
         First_Jenkins_Test calc = new First_Jenkins_Test();
-        assertEquals(10, calc.add(5, 5));
+        assertEquals(12, calc.add(6, 6));
     }
 }
