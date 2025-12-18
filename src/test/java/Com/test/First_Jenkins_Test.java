@@ -8,7 +8,7 @@ public class First_Jenkins_Test {
     @Test
     public void testAddition() {
         int result = add(2, 3);
-        assertEquals(5, result);
+        assertEquals(6, result);
     }
 
     // Make it a normal method, not a static inner class
