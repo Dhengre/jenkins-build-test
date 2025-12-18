@@ -11,7 +11,7 @@ public class First_Jenkins_Test {
 	    }
 
 	    public static void main(String[] args) {
-	        System.out.println("Sum of 2 + 3 = " + add(2,3));
+	        System.out.println("Sum of 2 + 5 = " + add(2,5));
 	    }
 	}
 }
