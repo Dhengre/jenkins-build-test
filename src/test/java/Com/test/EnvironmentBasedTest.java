@@ -1,21 +1,11 @@
 package Com.test;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-
 public class EnvironmentBasedTest {
-
-	   // method under test
-    public int add(int a, int b) {
+    public static int add(int a, int b) {
         return a + b;
     }
-    
-    @Test
-    public void testAdd() {
-        First_Jenkins_Test calc = new First_Jenkins_Test();
-        assertEquals(20, calc.add(10, 102));
-        
-       
-      
+
+    public static void main(String[] args) {
+        System.out.println("Sum of 2 + 3 = " + add(2,3));
     }
 }

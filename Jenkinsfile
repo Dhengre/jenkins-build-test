@@ -1,24 +1,25 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Dhengre/jenkins-build-test.git'
+                git branch: 'main', url: 'https://github.com/Dhengre/jenkins-build-test.git'
             }
         }
-
-        stage('Build & Test') {
+        stage('Build') {
             steps {
-                sh 'mvn -q test'
+                sh 'mvn clean compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
         }
     }
-
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
+            junit '**/target/surefire-reports/*.xml'
         }
     }
 }
