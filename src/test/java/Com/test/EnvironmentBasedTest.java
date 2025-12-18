@@ -1,0 +1,16 @@
+package Com.test;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class EnvironmentBasedTest {
+
+    @Test
+    public void testAdd() {
+        First_Jenkins_Test calc = new First_Jenkins_Test();
+        assertEquals(200, calc.add(6, 6));
+        
+       
+      
+    }
+}
