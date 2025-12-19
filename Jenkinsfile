@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(name: 'TEST_TYPE', choices: ['ALL', 'UI', 'API'])
+        string(name: 'THREAD_COUNT', defaultValue: '4')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,22 +13,17 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Docker Test Run') {
             steps {
-                sh 'docker build -t ci-test-image .'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh 'docker run --rm ci-test-image'
+                sh 'docker-compose up --build'
             }
         }
     }
 
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
+            sh 'docker-compose down'
+            allure results: [[path: 'target/allure-results']]
         }
     }
 }
