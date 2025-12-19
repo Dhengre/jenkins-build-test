@@ -13,7 +13,7 @@ public class EnvironmentBasedTest {
     @Test
     public void testAdd() {
         First_Jenkins_Test calc = new First_Jenkins_Test();
-        assertEquals(400, calc.add(200, 100));
+        assertEquals(400, calc.add(200, 200));
           
       
     }
