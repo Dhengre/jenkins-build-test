@@ -1,40 +1,34 @@
 pipeline {
-    agent any
-
-    // Use Maven configured in Jenkins
-    tools {
-        maven 'Maven3'
-        jdk 'JDK17' // optional, if you have multiple JDKs
+    agent {
+        docker {
+            image 'maven:3.9.11-eclipse-temurin-17'
+            args '-v $HOME/.m2:/root/.m2'
+        }
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Run Tests') {
             steps {
-                // -B = batch mode, -q = quiet (reduces INFO logs)
-                sh 'mvn -B -q clean compile'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Quiet mode, only errors/warnings
-                sh 'mvn -B -q test'
-                // Capture test results in Jenkins UI
-                junit '**/target/surefire-reports/*.xml'
+                sh 'mvn -q clean test'
             }
         }
     }
 
     post {
         always {
-            echo 'Pipeline finished.'
+            junit 'target/surefire-reports/*.xml'
+        }
+        success {
+            echo '✅ Tests passed'
+        }
+        failure {
+            echo '❌ Tests failed'
         }
     }
 }
